@@ -10,3 +10,4 @@ portable-build/
 *.log
 .DS_Store
 Thumbs.db
+portable-build/
