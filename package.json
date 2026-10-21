@@ -1,0 +1,60 @@
+{
+  "name": "phoenix-music",
+  "version": "0.2.0",
+  "private": true,
+  "description": "Portable local music player for Windows",
+  "type": "module",
+  "main": "electron-main.cjs",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "dev:desktop": "concurrently -k \"vite --host 127.0.0.1\" \"wait-on http://127.0.0.1:1420 && electron .\"",
+    "build:portable:win": "npm run build && electron-builder --win dir --x64"
+  },
+  "dependencies": {
+    "lucide-react": "^0.468.0",
+    "music-metadata": "^10.7.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^9.1.2",
+    "electron": "^35.0.0",
+    "electron-builder": "^26.0.12",
+    "typescript": "~5.7.2",
+    "vite": "^6.0.5",
+    "wait-on": "^8.0.2"
+  },
+  "build": {
+    "appId": "com.phoenixmusic.desktop",
+    "productName": "Phoenix Music",
+    "asar": true,
+    "directories": {
+      "output": "portable-build"
+    },
+    "files": [
+      "dist/**/*",
+      "electron-main.cjs",
+      "electron-preload.cjs",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "dir",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "executableName": "Phoenix Music"
+    },
+    "electronLanguages": [
+      "en-US"
+    ]
+  }
+}
